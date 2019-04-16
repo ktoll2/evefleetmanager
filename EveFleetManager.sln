@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveFleetManager", "EveFleetManager\EveFleetManager.csproj", "{CFD549CB-A0FE-4C58-BD4F-3EA900DF22AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFD549CB-A0FE-4C58-BD4F-3EA900DF22AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD549CB-A0FE-4C58-BD4F-3EA900DF22AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD549CB-A0FE-4C58-BD4F-3EA900DF22AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD549CB-A0FE-4C58-BD4F-3EA900DF22AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC99808D-51B3-42FF-8056-5F05FCC1E685}
+	EndGlobalSection
+EndGlobal
