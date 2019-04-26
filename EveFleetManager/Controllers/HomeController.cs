@@ -50,10 +50,11 @@ namespace EveFleetManager.Controllers
             var creds = Convert.ToBase64String(credBytes);
 
             httpRequest.AddHeader("Authorization", $"Basic {creds}");
+            httpRequest.AddHeader("Accept", "application/json");
             httpRequest.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             httpRequest.AddHeader("Host", "login.eveonline.com");
-            httpRequest.AddQueryParameter("grant_type", "authorization_code");
-            httpRequest.AddQueryParameter("code", code);
+            httpRequest.AddParameter("grant_type", "authorization_code");
+            httpRequest.AddParameter("code", code);
 
             var result = httpClient.Post(httpRequest);
             return View("index");
