@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using EveFleetManager.DataContext;
 using Microsoft.AspNetCore.Mvc;
 using EveFleetManager.Models;
 using RestSharp;
@@ -16,7 +17,12 @@ namespace EveFleetManager.Controllers
         string callBackUrl = "https://localhost:44390/home/Callback";
 
         string eveTokenPostUrl = "https://login.eveonline.com/v2/oauth/token";
-        
+
+        private EveFleetManagerContext _dbContext;
+        public HomeController(EveFleetManagerContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public IActionResult Index()
         {
