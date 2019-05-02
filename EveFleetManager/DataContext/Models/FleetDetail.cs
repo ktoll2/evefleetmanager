@@ -13,7 +13,7 @@ namespace EveFleetManager.DataContext.Models
         public decimal SharePercentage { get; set; }
         public string CommanderComments { get; set; }
 
-        public virtual User Character { get; set; }
+        public virtual Character Character { get; set; }
         public virtual Fleet Fleet { get; set; }
     }
 }

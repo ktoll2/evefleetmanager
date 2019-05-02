@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace EveFleetManager.DataContext.Models
 {
-    public partial class User
+    public partial class Character
     {
-        public User()
+        public Character()
         {
             Fleet = new HashSet<Fleet>();
             FleetDetail = new HashSet<FleetDetail>();
         }
 
-        public long CharacterId { get; set; }
+        public long Id { get; set; }
         public string RefreshToken { get; set; }
         public string BearerToken { get; set; }
         public DateTime TokenExpires { get; set; }
