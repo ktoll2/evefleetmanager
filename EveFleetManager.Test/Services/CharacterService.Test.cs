@@ -17,7 +17,7 @@ namespace EveFleetManager.Test.Services
     {
         private DbContextOptions<EveFleetManagerContext> _options;
         private EveFleetManagerContext _dbContext;
-        private CharacterService _characterService;
+        private ICharacterService _characterService;
 
         private long _id1;
         private string _name1;

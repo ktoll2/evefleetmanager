@@ -1,4 +1,8 @@
-﻿using EveFleetManager.DataContext;
+﻿using ESI.NET;
+using EveFleetManager.Controllers;
+using EveFleetManager.Controllers.Interfaces;
+using EveFleetManager.DataContext;
+using EveFleetManager.Models;
 using EveFleetManager.Services;
 using EveFleetManager.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace EveFleetManager
 {
@@ -21,7 +26,7 @@ namespace EveFleetManager
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .AddAzureAppConfiguration(System.Environment.GetEnvironmentVariable("AzureAppConfig"));
             Environment = env;
@@ -40,11 +45,41 @@ namespace EveFleetManager
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var EsiConfig = Configuration.GetSection("EsiConfig");
+            EsiConfig["ClientId"] = Configuration["ESIConfigClientId"];
+            EsiConfig["SecretKey"] = Configuration["ESIConfigSecretKey"];
+            EsiConfig["CallbackUrl"] = Configuration["ESIConfigCallbackUrl"];
+            EsiConfig["UserAgent"] = Configuration["ESIConfigUserAgent"];
+            services.AddEsi(EsiConfig);
+
+            var a = EsiConfig["ClientId"];
+            var b = EsiConfig["SecretKey"];
+            var c = EsiConfig["CallbackUrl"];
+            var d = EsiConfig["UserAgent"];
+
             services.AddDbContext<EveFleetManagerContext>(options =>
                 options.UseSqlServer(Configuration["EFMDBConnectionString"]));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.Configure<EsiAuthScopesModel>(Configuration.GetSection("EsiAuthScopes"));
+            
+
+            //Controllers
+            services.AddScoped<IAuthController, AuthController>();
+
+            //Services
             services.AddScoped<ICharacterService, CharacterService>();
+            services.AddScoped<ISessionService, SessionService>();
+
+            //Respoitories
+
+
+            //Helpers
+
+
+            //Singletons
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
