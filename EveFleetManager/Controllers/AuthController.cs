@@ -6,7 +6,9 @@ using ESI.NET;
 using ESI.NET.Enumerations;
 using ESI.NET.Models.SSO;
 using EveFleetManager.Controllers.Interfaces;
+using EveFleetManager.DataContext.Models;
 using EveFleetManager.Models;
+using EveFleetManager.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -19,9 +21,12 @@ namespace EveFleetManager.Controllers
     {
         private readonly List<string> _esiAuthScopes;
         private readonly IEsiClient _esiClient;
+        private ISessionService _sessionService;
+        private ICharacterService _charactorService;
 
-        public AuthController(IEsiClient esiClient, IOptions<EsiAuthScopesModel> esiAuthScopes)
+        public AuthController(IEsiClient esiClient, IOptions<EsiAuthScopesModel> esiAuthScopes,ISessionService sessionService)
         {
+            _sessionService = sessionService;
             _esiClient = esiClient;
             _esiAuthScopes = esiAuthScopes.Value.EsiAuthScopes;
         }
@@ -36,8 +41,13 @@ namespace EveFleetManager.Controllers
         [HttpGet("Callback")]
         public async Task<IActionResult> Callback(string code)
         {
+
             SsoToken ssoToken = await _esiClient.SSO.GetToken(GrantType.AuthorizationCode, code);
+
             AuthorizedCharacterData auth_char = await _esiClient.SSO.Verify(ssoToken);
+
+            Session session= _sessionService.CreateSession(auth_char.CharacterID);
+            _charactorService.UpdateCharacterInformation(auth_char);
             return Redirect("~/Home/Index");
         }
     }

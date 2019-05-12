@@ -3,6 +3,9 @@ using EveFleetManager.Controllers;
 using EveFleetManager.Controllers.Interfaces;
 using EveFleetManager.DataContext;
 using EveFleetManager.Models;
+using EveFleetManager.Repositories;
+using EveFleetManager.Repositories.Interfaces;
+using EveFleetManager.Respoitories;
 using EveFleetManager.Services;
 using EveFleetManager.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -52,11 +55,6 @@ namespace EveFleetManager
             EsiConfig["UserAgent"] = Configuration["ESIConfigUserAgent"];
             services.AddEsi(EsiConfig);
 
-            var a = EsiConfig["ClientId"];
-            var b = EsiConfig["SecretKey"];
-            var c = EsiConfig["CallbackUrl"];
-            var d = EsiConfig["UserAgent"];
-
             services.AddDbContext<EveFleetManagerContext>(options =>
                 options.UseSqlServer(Configuration["EFMDBConnectionString"]));
 
@@ -69,11 +67,12 @@ namespace EveFleetManager
             services.AddScoped<IAuthController, AuthController>();
 
             //Services
-            services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ICharacterService, CharacterService>();
 
             //Respoitories
-
+            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
 
             //Helpers
 
