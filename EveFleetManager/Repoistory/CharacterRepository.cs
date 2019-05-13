@@ -2,6 +2,7 @@ using EveFleetManager.DataContext.Models;
 using EveFleetManager.DataContext;
 using EveFleetManager.Repositories.Interfaces;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace EveFleetManager.Respoitories
 {
@@ -37,7 +38,7 @@ namespace EveFleetManager.Respoitories
 
         public Character GetCharacterById(long characterId)
         {
-            return _dbContext.Character.FirstOrDefault(x => x.Id == characterId);
+            return _dbContext.Character.Include(a=>a.Fleet).FirstOrDefault(x => x.Id == characterId);
         }
     }
 }

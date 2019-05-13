@@ -43,7 +43,7 @@ namespace EveFleetManager.Services
         public bool IsSessionValid(string sessionId)
         {
             var session = _sessionRepository.GetSessionBySessionId(sessionId);
-
+         
             return session?.SessionExpires > DateTime.UtcNow;
         }
     }

@@ -24,16 +24,18 @@ namespace EveFleetManager.Controllers
         private ISessionService _sessionService;
         private ICharacterService _charactorService;
 
-        public AuthController(IEsiClient esiClient, IOptions<EsiAuthScopesModel> esiAuthScopes,ISessionService sessionService)
+        public AuthController(IEsiClient esiClient, IOptions<EsiAuthScopesModel> esiAuthScopes,ISessionService sessionService,ICharacterService characterService)
         {
             _sessionService = sessionService;
             _esiClient = esiClient;
-            _esiAuthScopes = esiAuthScopes.Value.EsiAuthScopes;
+            _esiAuthScopes = esiAuthScopes.Value.Scopes;
+            _charactorService = characterService;
         }
 
         [HttpGet("Login")]
         public IActionResult Login()
         {
+
             var authenticationUrl = _esiClient.SSO.CreateAuthenticationUrl(_esiAuthScopes);
             return Redirect(authenticationUrl);
         }
@@ -43,11 +45,14 @@ namespace EveFleetManager.Controllers
         {
 
             SsoToken ssoToken = await _esiClient.SSO.GetToken(GrantType.AuthorizationCode, code);
-
+            
             AuthorizedCharacterData auth_char = await _esiClient.SSO.Verify(ssoToken);
 
             Session session= _sessionService.CreateSession(auth_char.CharacterID);
             _charactorService.UpdateCharacterInformation(auth_char);
+
+            Response.Cookies.Append("EveFleetSession", session.SessionId);
+
             return Redirect("~/Home/Index");
         }
     }

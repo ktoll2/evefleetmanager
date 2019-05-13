@@ -4,6 +4,6 @@ namespace EveFleetManager.Models
 {
     public class EsiAuthScopesModel
     {
-        public List<string> EsiAuthScopes { get; set; }
+        public List<string> Scopes { get; set; }
     }
 }

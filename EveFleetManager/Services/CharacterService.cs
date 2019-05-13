@@ -26,10 +26,8 @@ namespace EveFleetManager.Services
 
         public void UpdateCharacterInformation(AuthorizedCharacterData characterData)
         {
-
+            
             var character = GetCharacter(characterData.CharacterID);
-
-
 
             if (character == null )
             {

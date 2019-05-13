@@ -3,6 +3,8 @@ using EveFleetManager.Controllers;
 using EveFleetManager.Controllers.Interfaces;
 using EveFleetManager.DataContext;
 using EveFleetManager.Models;
+using EveFleetManager.Repoistory;
+using EveFleetManager.Repoistory.Interface;
 using EveFleetManager.Repositories;
 using EveFleetManager.Repositories.Interfaces;
 using EveFleetManager.Respoitories;
@@ -53,14 +55,19 @@ namespace EveFleetManager
             EsiConfig["SecretKey"] = Configuration["ESIConfigSecretKey"];
             EsiConfig["CallbackUrl"] = Configuration["ESIConfigCallbackUrl"];
             EsiConfig["UserAgent"] = Configuration["ESIConfigUserAgent"];
+           
             services.AddEsi(EsiConfig);
 
             services.AddDbContext<EveFleetManagerContext>(options =>
                 options.UseSqlServer(Configuration["EFMDBConnectionString"]));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
 
-            services.Configure<EsiAuthScopesModel>(Configuration.GetSection("EsiAuthScopes"));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+             
+            var scopes = Configuration.GetSection("EsiAuthScopes").Get<List<string>>();
+            // var b = EsiConfig["EsiAuthScopes"];
+            services.Configure<EsiAuthScopesModel>(o => Configuration.GetSection("EsiAuthScopes").Bind(o));
             
 
             //Controllers
@@ -69,12 +76,13 @@ namespace EveFleetManager
             //Services
             services.AddScoped<ISessionService, SessionService>();
             services.AddScoped<ICharacterService, CharacterService>();
-
+            services.AddScoped<IFleetService, FleetService>();
             //Respoitories
+            services.AddScoped<IFleetRepository,FleetRepository > ();
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<ICharacterRepository, CharacterRepository>();
 
-            //Helpers
+        //Helpers
 
 
             //Singletons
