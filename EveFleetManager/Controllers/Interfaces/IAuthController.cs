@@ -10,5 +10,6 @@ namespace EveFleetManager.Controllers.Interfaces
     {
         IActionResult Login();
         Task<IActionResult> Callback(string code);
+        Task<IActionResult> Refresh(string refreshToken);
     }
 }

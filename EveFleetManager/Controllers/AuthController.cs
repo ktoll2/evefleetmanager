@@ -55,5 +55,14 @@ namespace EveFleetManager.Controllers
 
             return Redirect("~/Home/Index");
         }
+
+        [HttpGet("Refresh")]
+        public async Task<IActionResult> Refresh(string refreshToken)
+        {
+
+            SsoToken token = await _esiClient.SSO.GetToken(GrantType.RefreshToken, refreshToken);
+
+            return Ok(token);
+        }
     }
 }

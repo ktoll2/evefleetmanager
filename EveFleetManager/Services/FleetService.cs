@@ -1,6 +1,7 @@
 ﻿using ESI.NET;
 using ESI.NET.Enumerations;
 using ESI.NET.Models.SSO;
+using EveFleetManager.Controllers.Interfaces;
 using EveFleetManager.DataContext.Models;
 using EveFleetManager.Models;
 using EveFleetManager.Repoistory.Interface;
@@ -16,10 +17,12 @@ namespace EveFleetManager.Services
     {
         private IFleetRepository _fleetRepository;
         private IEsiClient _esiClient;
-        public FleetService(IFleetRepository fleetRepository, IEsiClient esiClient)
+        private IAuthController _authController;
+        public FleetService(IFleetRepository fleetRepository, IEsiClient esiClient,IAuthController authcontroller)
         {
             _esiClient = esiClient;
             _fleetRepository = fleetRepository;
+            _authController = authcontroller;
         }
 
         public bool CharacterHasActiveFleet(long CharacterId)
@@ -31,8 +34,16 @@ namespace EveFleetManager.Services
         public FleetWithInfo StartFleet(Character character)
         {
             createEsiClient(character);
-            var potato =  _esiClient.Fleets.FleetInfo().Result;
+            var fleetinfo =  _esiClient.Fleets.FleetInfo().Result;
 
+            
+            
+            var fleetmemberinfo = _esiClient.Fleets.Members(fleetinfo.Data.FleetId).Result;
+
+            if (fleetmemberinfo.Data == null)
+            {
+                throw new Exception(fleetmemberinfo.Message);
+            }
 
 
      
@@ -48,14 +59,16 @@ namespace EveFleetManager.Services
 
          private void createEsiClient(Character character)
         {
-
+            var token = _authController.Refresh(character.RefreshToken).Result;
+            
             AuthorizedCharacterData authchar = new AuthorizedCharacterData();
+
             authchar.CharacterID = (int)character.Id;
             authchar.ExpiresOn = character.TokenExpires;
             authchar.RefreshToken = character.RefreshToken;
-            authchar.Token = character.BearerToken;
-           
+            authchar.Token = ;
             _esiClient.SetCharacterData(authchar);
+          
           //  authchar.TokenType = GrantType.AuthorizationCode.ToString();
         }
 
