@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace EveFleetManager.Models
 {
@@ -10,17 +9,18 @@ namespace EveFleetManager.Models
         public FleetWithInfo()
         {
             Id = -1;
-            Name = string.Empty;
-            FleetCommanderId = -1;
-            FleetCommanderName = string.Empty;
-            Wings = new List<Wing>();
+            Description = string.Empty;
+            FleetBossCharacterId = -1;
+            FleetBossName = string.Empty;
+            FleetCharacters = new List<FleetCharacter>();
             Status = new FleetStatusEnum();
         }
+
         public int Id;
-        public string Name;
-        public int FleetCommanderId;
-        public String FleetCommanderName;
-        public List<Wing> Wings;
+        public string Description;
+        public int FleetBossCharacterId;
+        public string FleetBossName;
+        public List<FleetCharacter> FleetCharacters;
         public FleetStatusEnum Status;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ESI.NET.Models.SSO;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace EveFleetManager.Controllers.Interfaces
     public interface IAuthController
     {
         IActionResult Login();
-        Task<IActionResult> Callback(string code);
-        Task<IActionResult> Refresh(string refreshToken);
+        IActionResult Callback(string code);
+        IActionResult Refresh(string refreshToken);
     }
 }

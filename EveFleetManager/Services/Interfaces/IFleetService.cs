@@ -11,7 +11,7 @@ namespace EveFleetManager.Services.Interfaces
     {
         bool CharacterHasActiveFleet(long CharacterId);
 
-        FleetWithInfo StartFleet(Character character);
+        FleetWithInfo StartFleet(Session SessionId);
 
         FleetWithInfo GetActiveFleet(Character character);
     }

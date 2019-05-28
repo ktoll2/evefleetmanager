@@ -23,9 +23,16 @@ namespace EveFleetManager.Controllers
         private readonly IEsiClient _esiClient;
         private ISessionService _sessionService;
         private ICharacterService _charactorService;
+        private IAuthService _authService;
 
-        public AuthController(IEsiClient esiClient, IOptions<EsiAuthScopesModel> esiAuthScopes,ISessionService sessionService,ICharacterService characterService)
+        public AuthController(IEsiClient esiClient,
+            IOptions<EsiAuthScopesModel> esiAuthScopes,
+            ISessionService sessionService,
+            ICharacterService characterService,
+            IAuthService authService
+            )
         {
+            _authService = authService;
             _sessionService = sessionService;
             _esiClient = esiClient;
             _esiAuthScopes = esiAuthScopes.Value.Scopes;
@@ -41,26 +48,22 @@ namespace EveFleetManager.Controllers
         }
 
         [HttpGet("Callback")]
-        public async Task<IActionResult> Callback(string code)
+        public IActionResult Callback(string code)
         {
 
-            SsoToken ssoToken = await _esiClient.SSO.GetToken(GrantType.AuthorizationCode, code);
-            
-            AuthorizedCharacterData auth_char = await _esiClient.SSO.Verify(ssoToken);
 
-            Session session= _sessionService.CreateSession(auth_char.CharacterID);
-            _charactorService.UpdateCharacterInformation(auth_char);
+            var session = _authService.Callback(code);
 
-            Response.Cookies.Append("EveFleetSession", session.SessionId);
+            Response.Cookies.Append("EveFleetSession", session);
 
             return Redirect("~/Home/Index");
         }
 
         [HttpGet("Refresh")]
-        public async Task<IActionResult> Refresh(string refreshToken)
+        public IActionResult Refresh(string refreshToken)
         {
 
-            SsoToken token = await _esiClient.SSO.GetToken(GrantType.RefreshToken, refreshToken);
+            SsoToken token = _authService.RefreshBearerToken(refreshToken);
 
             return Ok(token);
         }

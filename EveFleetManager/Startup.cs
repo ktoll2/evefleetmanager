@@ -2,6 +2,8 @@
 using EveFleetManager.Controllers;
 using EveFleetManager.Controllers.Interfaces;
 using EveFleetManager.DataContext;
+using EveFleetManager.Helper;
+using EveFleetManager.Helper.Interface;
 using EveFleetManager.Models;
 using EveFleetManager.Repoistory;
 using EveFleetManager.Repoistory.Interface;
@@ -77,13 +79,14 @@ namespace EveFleetManager
             services.AddScoped<ISessionService, SessionService>();
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IFleetService, FleetService>();
+            services.AddScoped<IAuthService,AuthService > ();
             //Respoitories
             services.AddScoped<IFleetRepository,FleetRepository > ();
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<ICharacterRepository, CharacterRepository>();
-
-        //Helpers
-
+            services.AddScoped<IFleetDetailsRepository, FleetDetailsRepository>();
+            //Helpers
+            services.AddScoped<IFleetWithInfoHelper, FleetWithInfoHelper>();
 
             //Singletons
             services.AddSingleton(Configuration);

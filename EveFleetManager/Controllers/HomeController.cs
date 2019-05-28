@@ -12,31 +12,23 @@ namespace EveFleetManager.Controllers
     public class HomeController : Controller
     {
         private ISessionService _sessionService;
-        private ICharacterService _characterService;
         private IFleetService _fleetService;
-        public HomeController(ISessionService sessionService,ICharacterService characterservice,IFleetService fleetService)
+        public HomeController(IFleetService fleetService,ISessionService sessionService)
         {
             _fleetService = fleetService;
             _sessionService = sessionService;
-            _characterService = characterservice;
+
         }
 
         public IActionResult Index()
         {
-            string sessionIdCookie = "";
+            string sessionIdCookie = GetSessionOutOfCookie();
 
-            if (!Request.Cookies.TryGetValue("EveFleetSession", out sessionIdCookie) && 
-                string.IsNullOrWhiteSpace(sessionIdCookie) && 
-                !_sessionService.IsSessionValid(sessionIdCookie))
+            if (string.IsNullOrWhiteSpace(sessionIdCookie) 
+                && !_sessionService.IsSessionValid(sessionIdCookie))
             {
                 return RedirectToAction("login","auth");
             }
-            Session session = _sessionService.GetSessionBySessionId(sessionIdCookie);
-            Character character = _characterService.GetCharacter(session.CharacterId);
-
-            var potato = _fleetService.CharacterHasActiveFleet(character.Id);
-
-            FleetWithInfo ActiveFleet =  _fleetService.StartFleet(character);
 
             return View();
         }
@@ -44,6 +36,12 @@ namespace EveFleetManager.Controllers
 
         public IActionResult StartFleet()
         {
+
+            string sessionIdCookie = GetSessionOutOfCookie();
+
+            Session session = _sessionService.GetSessionBySessionId(sessionIdCookie);
+
+            FleetWithInfo ActiveFleet = _fleetService.StartFleet(session);
 
 
 
@@ -57,5 +55,14 @@ namespace EveFleetManager.Controllers
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private string GetSessionOutOfCookie()
+        {
+            string sessionIdCookie = "";
+            Request.Cookies.TryGetValue("EveFleetSession", out sessionIdCookie);
+            return sessionIdCookie;
+
+        }
+        
     }
 }

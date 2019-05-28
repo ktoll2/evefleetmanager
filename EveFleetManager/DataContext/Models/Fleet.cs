@@ -18,7 +18,7 @@ namespace EveFleetManager.DataContext.Models
         public int State { get; set; }
         public string Comment { get; set; }
 
-        public virtual Character Commander { get; set; }
-        public virtual ICollection<FleetDetail> FleetDetail { get; set; }
+        public  Character Commander { get; set; }
+        public  ICollection<FleetDetail> FleetDetail { get; set; }
     }
 }
