@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace EveFleetManager.Models
 {
-    public  class FleetCharacter
+    public class FleetCharacter
     {
-        string Name;
-        string Id;
-        DateTime DateJoined;
-        bool RemovedFromFleet;
-        decimal SharePercentage;
-        string Comments;
-        string ShipType;
+        string Name { get; set; }
+        string Id { get; set; }
+        DateTime DateJoined { get; set; }
+        bool RemovedFromFleet { get; set; }
+        decimal SharePercentage { get; set; }
+        string Comments { get; set; }
+        string ShipType { get; set; }
 
     }
 }

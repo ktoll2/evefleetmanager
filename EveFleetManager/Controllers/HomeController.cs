@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EveFleetManager.Models;
 using Microsoft.AspNetCore.Http;
 using EveFleetManager.Services.Interfaces;
-
 using EveFleetManager.DataContext.Models;
-using System.Threading.Tasks;
 
 namespace EveFleetManager.Controllers
 {

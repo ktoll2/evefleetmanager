@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ESI.NET;
-using ESI.NET.Enumerations;
 using ESI.NET.Models.SSO;
 using EveFleetManager.Controllers.Interfaces;
-using EveFleetManager.DataContext.Models;
 using EveFleetManager.Models;
 using EveFleetManager.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace EveFleetManager.Controllers
 {

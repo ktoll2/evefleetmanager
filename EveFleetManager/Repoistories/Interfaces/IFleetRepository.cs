@@ -1,10 +1,6 @@
 ﻿using EveFleetManager.DataContext.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace EveFleetManager.Repoistory.Interface
+namespace EveFleetManager.Repositories.Interfaces
 {
     public interface IFleetRepository
     {

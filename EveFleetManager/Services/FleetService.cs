@@ -1,17 +1,13 @@
 ﻿using ESI.NET;
-using ESI.NET.Enumerations;
-using ESI.NET.Models.Fleets;
 using ESI.NET.Models.SSO;
-using EveFleetManager.Controllers.Interfaces;
 using EveFleetManager.DataContext.Models;
-using EveFleetManager.Helper.Interface;
+using EveFleetManager.Helpers.Interfaces;
 using EveFleetManager.Models;
-using EveFleetManager.Repoistory.Interface;
+using EveFleetManager.Repositories.Interfaces;
 using EveFleetManager.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EveFleetManager.Services
 {

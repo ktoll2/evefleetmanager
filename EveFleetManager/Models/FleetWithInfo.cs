@@ -16,11 +16,11 @@ namespace EveFleetManager.Models
             Status = new FleetStatusEnum();
         }
 
-        public int Id;
-        public string Description;
-        public int FleetBossCharacterId;
-        public string FleetBossName;
-        public List<FleetCharacter> FleetCharacters;
-        public FleetStatusEnum Status;
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public int FleetBossCharacterId { get; set; }
+        public string FleetBossName { get; set; }
+        public List<FleetCharacter> FleetCharacters { get; set; }
+        public FleetStatusEnum Status { get; set; }
     }
 }

@@ -1,12 +1,9 @@
 ﻿using EveFleetManager.DataContext;
 using EveFleetManager.DataContext.Models;
-using EveFleetManager.Repoistory.Interface;
-using System;
+using EveFleetManager.Repositories.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace EveFleetManager.Repoistory
+namespace EveFleetManager.Repositories
 {
     public class FleetDetailsRepository : IFleetDetailsRepository
     {

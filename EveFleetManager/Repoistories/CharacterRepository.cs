@@ -4,7 +4,7 @@ using EveFleetManager.Repositories.Interfaces;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace EveFleetManager.Respoitories
+namespace EveFleetManager.Repositories
 {
     public class CharacterRepository : ICharacterRepository
     {

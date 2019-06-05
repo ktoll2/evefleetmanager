@@ -1,10 +1,7 @@
 ﻿using EveFleetManager.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace EveFleetManager.Helper.Interface
+namespace EveFleetManager.Helpers.Interfaces
 {
     public interface IFleetWithInfoHelper
     {

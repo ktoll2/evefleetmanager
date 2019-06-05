@@ -8,10 +8,10 @@ namespace EveFleetManager.Models
     public class Wing
     {
         
-        public int Id;
-        public int Name;
-        public int WingCommanderId;
-        public String WingCommanderName;
-        public List<Squad> Squads;
+        public int Id { get; set; }
+        public int Name { get; set; }
+        public int WingCommanderId { get; set; }
+        public String WingCommanderName { get; set; }
+        public List<Squad> Squads { get; set; }
     }
 }

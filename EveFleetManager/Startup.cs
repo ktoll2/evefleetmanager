@@ -2,14 +2,11 @@
 using EveFleetManager.Controllers;
 using EveFleetManager.Controllers.Interfaces;
 using EveFleetManager.DataContext;
-using EveFleetManager.Helper;
-using EveFleetManager.Helper.Interface;
+using EveFleetManager.Helpers;
+using EveFleetManager.Helpers.Interfaces;
 using EveFleetManager.Models;
-using EveFleetManager.Repoistory;
-using EveFleetManager.Repoistory.Interface;
 using EveFleetManager.Repositories;
 using EveFleetManager.Repositories.Interfaces;
-using EveFleetManager.Respoitories;
 using EveFleetManager.Services;
 using EveFleetManager.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;

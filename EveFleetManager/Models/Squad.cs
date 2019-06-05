@@ -8,10 +8,10 @@ namespace EveFleetManager.Models
 {
     public class Squad
     {
-        public int Id;
-        public int Name;
-        public int SquadommanderId;
-        public String SquadCommanderName;
-        public List<Character> SquadMembers;
+        public int Id { get; set; }
+        public int Name { get; set; }
+        public int SquadommanderId { get; set; }
+        public String SquadCommanderName { get; set; }
+        public List<Character> SquadMembers { get; set; }
     }
 }

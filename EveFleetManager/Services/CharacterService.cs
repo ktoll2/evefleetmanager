@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ESI.NET;
 using ESI.NET.Models.Fleets;
 using ESI.NET.Models.SSO;
-using EveFleetManager.DataContext;
 using EveFleetManager.DataContext.Models;
 using EveFleetManager.Repositories.Interfaces;
 using EveFleetManager.Services.Interfaces;

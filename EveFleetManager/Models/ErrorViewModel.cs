@@ -1,5 +1,3 @@
-using System;
-
 namespace EveFleetManager.Models
 {
     public class ErrorViewModel

@@ -1,11 +1,7 @@
-﻿using EveFleetManager.DataContext;
-using EveFleetManager.DataContext.Models;
+﻿using EveFleetManager.DataContext.Models;
 using EveFleetManager.Repositories.Interfaces;
 using EveFleetManager.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EveFleetManager.Services
 {
